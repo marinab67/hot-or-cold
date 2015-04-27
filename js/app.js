@@ -14,7 +14,7 @@ $(document).ready(function(){
 
   	function newGame () { 
   		numRand = Math.floor((Math.random()*100) + 1);
-  		console.log(x); 
+  		console.log(numRand); 
   	}
 
   	//Starts a new game on load//
