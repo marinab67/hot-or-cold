@@ -13,7 +13,7 @@ $(document).ready(function(){
   	});
 
   	function newGame () { 
-  		x = Math.floor((Math.random()*100) + 1);
+  		numRand = Math.floor((Math.random()*100) + 1);
   		console.log(x); 
   	}
 
@@ -27,11 +27,11 @@ $(document).ready(function(){
 
   
 
-  	function hotOrCold (number) {  
+  	function hotOrCold (userNumber) {  
   		if (isNaN($("#userGuess").val()) || ($("#userGuess").val())%1!=0) {alert("enter a whole number!!! thx."); }
   		else { 
-	  		number = $("#userGuess").val();
-	  		var difference = Math.abs(number - x);
+	  		userNumber = $("#userGuess").val();
+	  		var difference = Math.abs(userNumber - numRand);
 	  		if (difference > 49) {alert("freezing"); }
 	  		else if (29 < difference < 50) {alert("cold"); }
 	  		else if (19 < difference < 30) {alert("warm"); }
