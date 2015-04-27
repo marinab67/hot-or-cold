@@ -19,18 +19,25 @@ $(document).ready(function(){
 
   	//Starts a new game on load//
   	newGame();
+
+  	//Prevent submit button from refreshing page//
+  	$('#guessButton').click(function(e){
+  	e.preventDefault();
+	});
+
   
 
   	function hotOrCold (number) {  
   		if (isNaN($("#userGuess").val()) || ($("#userGuess").val())%1!=0) {alert("enter a whole number!!! thx."); }
   		else { 
-	  		number = parseInt($("#userGuess").val());
+	  		number = $("#userGuess").val();
 	  		var difference = Math.abs(number - x);
-	  		if (difference > 49) {alert("your guess is ice cold lol~"); }
+	  		if (difference > 49) {alert("freezing"); }
 	  		else if (29 < difference < 50) {alert("cold"); }
 	  		else if (19 < difference < 30) {alert("warm"); }
 	  		else if (9 < difference < 20) {alert("hot") ;}
-	  		else {alert("very hot"); }
+	  		else if (0 < difference < 10) {alert("very hot"); }
+	  		else if (difference==0) {alert("you guessed the number!");}
   		}
   	}
 
