@@ -16,16 +16,23 @@ $(document).ready(function(){
   		numRand = Math.floor((Math.random()*100) + 1);
   		console.log("Answer:" + numRand); 
   		//Displays list of guesses to user 
-  		var guessList = [];
+  		guessList = [];
   		//Compare the current guess to previous guess 
-  		var guessCompare = [];
-  		var correctGuess = false;
-  		var numOfGuesses = 1;
+  		guessCompare = [];
+  		correctGuess = false;
+  		numOfGuesses = 1;
   		$("#guesslist").empty();
+  		$("#userGuess").attr("placeholder", "Enter a whole number");
   	}
 
   	//Starts a new game on load//
   	newGame();
+
+  	//Starts a new game on "New Game" click//
+  	$(".new").click(function() { 
+  		newGame();
+  	});
+
 
   	//Prevent submit button from refreshing page//
   	$('#guessButton').click(function(e){
@@ -38,7 +45,7 @@ $(document).ready(function(){
   	//Evaluates the user's guess//
   	function hotOrCold () {  
   		if (numOfGuesses==1) {
-	  		while (correctGuess==false) {
+	  		//while (correctGuess==false)// 
 	  		//Check if the user's guess is NaN or contains a decimal//
 	  		if (isNaN($("#userGuess").val()) || ($("#userGuess").val())%1!=0) {
 	  			alert("Enter a whole number, plz."); 
@@ -77,7 +84,7 @@ $(document).ready(function(){
   			guessCompare.push(Math.abs(userNumber - numRand));
 			console.log("guessCompare:" + guessCompare);
 	  		
-	  	}
+	  	
 
 	  	numOfGuesses++; 
   	}
@@ -94,12 +101,12 @@ $(document).ready(function(){
 	  				$("#userGuess").attr("placeholder", "Enter a whole number").val("");
 	  			}
 	 			//Compare guess to previous guess 
-	 			else { 
-	 				//Add user's guess to guessCompare 
+	 			else {  
   					guessCompare.splice(0, 0, Math.abs(userNumber - numRand));
 					console.log("guessCompare:" + guessCompare);
 	 				compareGuess(); 
 	 				numOfGuesses++;	
+	 				break;
 	 			}
 		}
 	}
@@ -114,7 +121,7 @@ $(document).ready(function(){
   		$("#userGuess").attr("placeholder", "Colder").val("");
   	}
   	else { 
-  		$("#userGuess").attr("placeholder," "Same distance..").val("");
+  		$("#userGuess").attr("placeholder", "Same distance..").val("");
   	}
 
   }
