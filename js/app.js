@@ -99,7 +99,7 @@ $(document).ready(function(){
   					guessCompare.splice(0, 0, Math.abs(userNumber - numRand));
 					console.log("guessCompare:" + guessCompare);
 	 				compareGuess(); 
-	 				numOfGuesses++	
+	 				numOfGuesses++;	
 	 			}
 		}
 	}
