@@ -98,7 +98,8 @@ $(document).ready(function(){
 	 				//Add user's guess to guessCompare 
   					guessCompare.splice(0, 0, Math.abs(userNumber - numRand));
 					console.log("guessCompare:" + guessCompare);
-	 				compareGuess(); 	
+	 				compareGuess(); 
+	 				numOfGuesses++	
 	 			}
 		}
 	}
