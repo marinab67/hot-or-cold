@@ -37,8 +37,6 @@ $(document).ready(function(){
   	//Prevent submit button from refreshing page//
   	$('#guessButton').click(function(e){
 	  	e.preventDefault();
-	  	userNumber = $("#userGuess").val();
-		console.log("User guess:" + userNumber);
 		
 	});
 
@@ -54,9 +52,10 @@ $(document).ready(function(){
 	  			$("#userGuess").attr("placeholder", "Enter a whole number").val("");
 	  		}
 
-	  	
 
 	  		else { 
+	  			userNumber = $("#userGuess").val();
+				console.log("User guess:" + userNumber);
 		  		var difference = Math.abs(userNumber - numRand);
 		  		console.log(difference);
 		  		if (difference > 50) {
@@ -104,16 +103,19 @@ $(document).ready(function(){
   	else {
   		//Additional guesses 
 	  		while (correctGuess==false) { 
+		  		if (isNaN($("#userGuess").val()) || ($("#userGuess").val())%1!=0) {
+		  			alert("Enter a whole number, plz."); 
+	  				$("#userGuess").attr("placeholder", "Enter a whole number").val("");
+	  			}
+	  			else { 
+	  			userNumber = $("#userGuess").val();
+				console.log("User guess:" + userNumber);
 	  			if (userNumber==numRand) {
 		  			alert("You win!"); 
 		  			$("#feedback").html("You win!");
 		  			$("#userGuess").attr("placeholder", "").val("");
 		  			correctGuess = true;
 		  		}
-		  		else if (isNaN($("#userGuess").val()) || ($("#userGuess").val())%1!=0) {
-		  			alert("Enter a whole number, plz."); 
-	  				$("#userGuess").attr("placeholder", "Enter a whole number").val("");
-	  			}
 	 			//Compare guess to previous guess 
 	 			else {  
 	 				counter++;
@@ -124,7 +126,8 @@ $(document).ready(function(){
 	 				compareGuess(); 
 	 				numOfGuesses++;	
 	 				break;
-	 			}
+	 			} 
+	 		}
 		}
 	}
   }
