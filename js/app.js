@@ -23,6 +23,7 @@ $(document).ready(function(){
   		$("#count").html(counter);
   		numOfGuesses = 1;
   		$("#userGuess").attr("placeholder", "Enter a whole number");
+  		$("#feedback").html("Make your guess!");
   	}
 
   	//Starts a new game on load//
@@ -110,23 +111,23 @@ $(document).ready(function(){
 	  			else { 
 	  			userNumber = $("#userGuess").val();
 				console.log("User guess:" + userNumber);
-	  			if (userNumber==numRand) {
-		  			alert("You win!"); 
-		  			$("#feedback").html("You win!");
-		  			$("#userGuess").attr("placeholder", "").val("");
-		  			correctGuess = true;
-		  		}
+		  			if (userNumber==numRand) {
+			  			alert("You win!"); 
+			  			$("#feedback").html("You win!");
+			  			$("#userGuess").attr("placeholder", "").val("");
+			  			correctGuess = true;
+			  		}
 	 			//Compare guess to previous guess 
-	 			else {  
-	 				counter++;
-					$("#count").html(counter);
-					$("#guessList").append(userNumber + ", ");	
-  					guessCompare.splice(0, 0, Math.abs(userNumber - numRand));
-					console.log("guessCompare:" + guessCompare);
-	 				compareGuess(); 
-	 				numOfGuesses++;	
-	 				break;
-	 			} 
+		 			else {  
+		 				counter++;
+						$("#count").html(counter);
+						$("#guessList").append(userNumber + ", ");	
+	  					guessCompare.splice(0, 0, Math.abs(userNumber - numRand));
+						console.log("guessCompare:" + guessCompare);
+		 				compareGuess(); 
+		 				numOfGuesses++;	
+		 				break;
+	 				} 
 	 		}
 		}
 	}
