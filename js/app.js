@@ -1,6 +1,9 @@
 
 $(document).ready(function(){
-	
+	var counter; 
+	var guessCompare = [];
+	var numOfGuesses; 
+
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
     	$(".overlay").fadeIn(1000);
@@ -18,7 +21,6 @@ $(document).ready(function(){
   		$("#guessList").empty();
   		//Array compares the current guess to previous guess 
   		guessCompare = [];
-  		correctGuess = false;
   		counter = 0;
   		$("#count").html(counter);
   		numOfGuesses = 1;
@@ -43,18 +45,15 @@ $(document).ready(function(){
 
   
   	//Evaluates the user's guess//
+
   	function hotOrCold () {  
-  		if (numOfGuesses==1) {
-	  		//while (correctGuess==false)// 
-	  		//Check if the user's guess is NaN or contains a decimal//
-	  		if (isNaN($("#userGuess").val()) || ($("#userGuess").val())%1!=0) 
-				{
+  		if (numOfGuesses===1) { 
+  			var userGuess = $("#userGuess").val().trim();
+	  		var isInvalid = isNaN(userGuess) || (userGuess % 1 !== 0) || userGuess === "";
+	  		if (isInvalid) {
 	  			alert("Enter a whole number, plz."); 
 	  			$("#userGuess").attr("placeholder", "Enter a whole number").val("");
-	  		}
-
-
-	  		else { 
+  			} else { 
 	  			userNumber = $("#userGuess").val();
 				console.log("User guess:" + userNumber);
 		  		var difference = Math.abs(userNumber - numRand);
@@ -87,7 +86,6 @@ $(document).ready(function(){
 		  			alert("You win!"); 
 		  			$("#feedback").html("You win!");
 		  			$("#userGuess").attr("placeholder", "").val("");
-		  			correctGuess = true;
 		  		}
 		  	
 		  	counter++;
@@ -103,22 +101,19 @@ $(document).ready(function(){
   	}
   	else {
   		//Additional guesses 
-	  		while (correctGuess==false) { 
-		  		if (isNaN($("#userGuess").val()) || ($("#userGuess").val())%1!=0) {
+  				var userGuess = $("#userGuess").val().trim();
+	  			var isInvalid = isNaN(userGuess) || (userGuess % 1 !== 0) || userGuess === "";
+	  			if (isInvalid) {
 		  			alert("Enter a whole number, plz."); 
 	  				$("#userGuess").attr("placeholder", "Enter a whole number").val("");
-	  			}
-	  			else { 
+	  			} else { 
 	  			userNumber = $("#userGuess").val();
 				console.log("User guess:" + userNumber);
 		  			if (userNumber==numRand) {
 			  			alert("You win!"); 
 			  			$("#feedback").html("You win!");
 			  			$("#userGuess").attr("placeholder", "").val("");
-			  			correctGuess = true;
-			  		}
-	 			//Compare guess to previous guess 
-		 			else {  
+			  		} else {  
 		 				counter++;
 						$("#count").html(counter);
 						$("#guessList").append(userNumber + ", ");	
@@ -126,10 +121,10 @@ $(document).ready(function(){
 						console.log("guessCompare:" + guessCompare);
 		 				compareGuess(); 
 		 				numOfGuesses++;	
-		 				break;
+		 				
 	 				} 
 	 		}
-		}
+		
 	}
   }
 
@@ -138,12 +133,10 @@ $(document).ready(function(){
   	if (guessCompare[0] < guessCompare[1]) { 
   		$("#feedback").html("Warmer!");
   		$("#userGuess").attr("placeholder", "Enter a whole number").val("");
-  	}
-  	else if (guessCompare[0] > guessCompare[1]) { 
+  	} else if (guessCompare[0] > guessCompare[1]) { 
   		$("#feedback").html("Colder :(");
   		$("#userGuess").attr("placeholder", "Enter a whole number").val("");
-  	}
-  	else { 
+  	} else { 
   		$("#feedback").html("Neither warmer nor colder..");
   		$("#userGuess").attr("placeholder", "Enter a whole number").val("");
   	}
